@@ -1,8 +1,7 @@
 import os
-from PyPDF2 import PdfMerger
 import tkinter as tk
 from tkinter import filedialog, messagebox
-
+from PyPDF2 import PdfMerger
 
 def merge_pdfs(selected_files, output_path, status_label):
     try:
@@ -52,7 +51,7 @@ def merge_pdfs_gui(status_label):
         messagebox.showwarning("Warning", "No PDF files selected.")
         status_label.config(text="No PDF files selected", fg="orange")
         return
-    elif len(selected_files) == 1:
+    if len(selected_files) == 1:
         messagebox.showwarning("Warning", "Only one PDF file selected, please select at least 2 files")
         merge_pdfs_gui(status_label)
 
