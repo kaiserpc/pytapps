@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 from PyPDF2 import PdfMerger
 
-def merge_pdfs(selected_files, output_path, status_label):
+def merge_pdfs(selected_files, output_path, status_lbl):
     try:
         merger = PdfMerger()
 
@@ -19,10 +19,10 @@ def merge_pdfs(selected_files, output_path, status_label):
 
         print(f"PDF files merged at: {output_path}")
         messagebox.showinfo("Success", f"PDF files merged at: {output_path}")
-        status_label.config(text="PDF merged successfully!", fg="light green")
+        status_lbl.config(text="PDF merged successfully!", fg="light green")
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred: {str(e)}")
-        status_label.config(text="An error occurred. Check the logs.", fg="red")
+        status_lbl.config(text="An error occurred. Check the logs.", fg="red")
 
 
 def select_files():
@@ -45,24 +45,24 @@ def save_file():
     return output_file
 
 
-def merge_pdfs_gui(status_label):
+def merge_pdfs_gui(status_lbl):
     selected_files = select_files()
     if not selected_files:
         messagebox.showwarning("Warning", "No PDF files selected.")
-        status_label.config(text="No PDF files selected", fg="orange")
+        status_lbl.config(text="No PDF files selected", fg="orange")
         return
     if len(selected_files) == 1:
         messagebox.showwarning("Warning", "Only one PDF file selected, please select at least 2 files")
-        merge_pdfs_gui(status_label)
+        merge_pdfs_gui(status_lbl)
 
     # Select merged file destination
     output_path = save_file()
     if not output_path:
         messagebox.showwarning("Warning", "No output file selected.")
-        status_label.config(text="No output file selected", fg="orange")
+        status_lbl.config(text="No output file selected", fg="orange")
         return
 
-    merge_pdfs(selected_files, output_path, status_label)
+    merge_pdfs(selected_files, output_path, status_lbl)
 
 
 # Create main window
